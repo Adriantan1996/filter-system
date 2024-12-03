@@ -1,6 +1,8 @@
 # FilterSystem
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+RxJS version 7.8.0.
+It is built with [PrimeNG](https://github.com/primefaces/primeng) version 17.18.12
 
 ## Development server
 
