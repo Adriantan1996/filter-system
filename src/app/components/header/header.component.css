@@ -1,0 +1,13 @@
+header {
+  background-color: white;
+  color: rgb(16, 77, 199);
+  text-align: center;
+  padding: 10px 0;
+  display: flex;
+  align-items: center; /* Vertically center content */
+}
+h1 {
+  font-size: 24px;
+  flex-grow: 1; /* Make sure h1 takes available space to center it */
+  text-align: center;
+}

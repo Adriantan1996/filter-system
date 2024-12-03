@@ -1,0 +1,71 @@
+<div class="card">
+  <form [formGroup]="formGroup" class="form-flex">
+    <div class="rule">
+      <b>Rule One:</b>
+      <p-selectButton
+        class="condition-button"
+        [options]="ruleOneOptions"
+        formControlName="priceOneCondition"
+      ></p-selectButton>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          id="price-one"
+          formControlName="priceOne"
+        />
+        <label for="priceOne"> Price</label>
+      </p-floatLabel>
+      <b>And</b>
+      <p-selectButton
+        class="condition-button"
+        [options]="ruleOneOptions"
+        formControlName="priceTwoCondition"
+      ></p-selectButton>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          id="price-two"
+          formControlName="priceTwo"
+        />
+        <label for="priceTwo"> Price</label>
+      </p-floatLabel>
+    </div>
+    <div class="rule">
+      <b>Rule Two:</b>
+      <p-selectButton
+        class="condition-button"
+        [options]="ruleTwoOptions"
+        formControlName="portfolioOneCondition"
+      ></p-selectButton>
+      <p-floatLabel>
+        <input type="text" pInputText formControlName="portfolioOne" />
+        <label for="portfolioOne">Portfolio</label>
+      </p-floatLabel>
+      <b>And</b>
+      <p-selectButton
+        class="condition-button"
+        [options]="ruleTwoOptions"
+        formControlName="portfolioTwoCondition"
+      ></p-selectButton>
+      <p-floatLabel>
+        <input type="text" pInputText formControlName="portfolioTwo" />
+        <label for="portfolioTwo">Portfolio</label>
+      </p-floatLabel>
+    </div>
+    <div class="last-rule">
+      <b>Rule Three:</b>
+      <b>Beginning With</b>
+      <p-floatLabel>
+        <input type="text" pInputText formControlName="counterParty" />
+        <label for="counterParty">Counterparty</label>
+      </p-floatLabel>
+    </div>
+    <div style="display: flex; justify-content: center; padding: 10px">
+      <p-button
+        label="Filter By Rule"
+        class="p-button-primary"
+        (click)="onSubmit()"
+      />
+    </div>
+  </form>
+</div>
