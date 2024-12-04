@@ -78,7 +78,7 @@ export class RulesDisplayComponent implements OnInit {
       {
         field: 'Portfolio',
         condition: formData.portfolioTwoCondition,
-        value: formData.portfolioTwoCondition,
+        value: formData.portfolioTwo,
       },
     ]);
     ruleText += '\n\n';
