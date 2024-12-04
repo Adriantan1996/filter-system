@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -11,7 +11,6 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { DropdownModule } from 'primeng/dropdown';
 import {
   ruleOneOptions,
   RulesOneType,
@@ -19,9 +18,9 @@ import {
   ruleTwoOptions,
 } from '../utils/formOptions.constants';
 import { FormDataService } from '../utils/form-data.service';
-
+import { DropdownModule } from 'primeng/dropdown';
 @Component({
-  selector: 'app-forms',
+  selector: 'app-form-edit',
   standalone: true,
   imports: [
     CommonModule,
@@ -30,13 +29,13 @@ import { FormDataService } from '../utils/form-data.service';
     InputNumberModule,
     FloatLabelModule,
     ButtonModule,
-    SelectButtonModule,
     DropdownModule,
+    SelectButtonModule,
   ],
-  templateUrl: './forms.component.html',
-  styleUrl: './forms.component.css',
+  templateUrl: './form-edit.component.html',
+  styleUrls: ['./form-edit.component.css'],
 })
-export class FormsComponent implements OnInit {
+export class FormEditComponent implements OnInit {
   @Output() formSubmit = new EventEmitter();
   formGroup!: FormGroup;
 
@@ -48,20 +47,47 @@ export class FormsComponent implements OnInit {
   ngOnInit(): void {
     this.ruleOneOptions = ruleOneOptions;
     this.ruleTwoOptions = ruleTwoOptions;
-    // initiate form
+
+    const formData = this.formDataService.getFormData(); // Get the data from the store
+
     this.formGroup = new FormGroup({
-      priceOneCondition: new FormControl('', Validators.required),
-      priceOne: new FormControl(null, Validators.required),
-      priceTwoCondition: new FormControl('', Validators.required),
-      priceTwo: new FormControl(null, Validators.required),
-      portfolioOneCondition: new FormControl('', Validators.required),
-      portfolioOne: new FormControl('', Validators.required),
-      portfolioTwoCondition: new FormControl('', Validators.required),
-      portfolioTwo: new FormControl('', Validators.required),
-      counterPartyCondition: new FormControl('', Validators.required),
-      counterParty: new FormControl('', Validators.required),
+      priceOneCondition: new FormControl(
+        formData?.priceOneCondition,
+        Validators.required
+      ),
+      priceOne: new FormControl(formData?.priceOne, Validators.required),
+      priceTwoCondition: new FormControl(
+        formData?.priceTwoCondition,
+        Validators.required
+      ),
+      priceTwo: new FormControl(formData?.priceTwo, Validators.required),
+      portfolioOneCondition: new FormControl(
+        formData?.portfolioOneCondition,
+        Validators.required
+      ),
+      portfolioOne: new FormControl(
+        formData?.portfolioOne,
+        Validators.required
+      ),
+      portfolioTwoCondition: new FormControl(
+        formData?.portfolioTwoCondition,
+        Validators.required
+      ),
+      portfolioTwo: new FormControl(
+        formData?.portfolioTwo,
+        Validators.required
+      ),
+      counterPartyCondition: new FormControl(
+        formData?.counterPartyCondition,
+        Validators.required
+      ),
+      counterParty: new FormControl(
+        formData?.counterParty,
+        Validators.required
+      ),
     });
   }
+
   onSubmit() {
     if (this.formGroup.valid) {
       // Map the condition fields to their corresponding codes

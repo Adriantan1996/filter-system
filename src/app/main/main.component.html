@@ -1,4 +1,8 @@
 <div>
-  <app-forms (formSubmit)="handleFilter($event)"></app-forms>
+  <div [ngClass]="{'form-container': true}">
+    <app-forms (formSubmit)="handleFilter()"></app-forms>
+
+  </div>
+  <app-rules-display *ngIf="canEdit"></app-rules-display>
   <app-table [filteredData]="filteredData"></app-table>
 </div>

@@ -1,7 +1,7 @@
 import {
   RuleOneCondition,
   RuleTwoCondition,
-} from '../../components/forms/forms.component';
+} from '../../components/utils/formOptions.constants';
 import { TradeRule } from '../main.component';
 
 function checkPriceCondition(
@@ -9,12 +9,20 @@ function checkPriceCondition(
   price: number,
   compareValue: number
 ): boolean {
-  if (condition === RuleOneCondition.greaterThan) {
-    return price > compareValue;
-  } else if (condition === RuleOneCondition.lessThan) {
-    return price < compareValue;
+  switch (condition) {
+    case RuleOneCondition.greaterThan:
+      return price > compareValue;
+    case RuleOneCondition.greaterThanOrEqualTo:
+      return price >= compareValue;
+    case RuleOneCondition.lessThan:
+      return price < compareValue;
+    case RuleOneCondition.lessThanOrEqualTo:
+      return price <= compareValue;
+    case RuleOneCondition.equalTo:
+      return price === compareValue;
+    default:
+      return false; // fallback for unsupported conditions
   }
-  return false; // fallback in case of invalid condition
 }
 
 function checkPortfolioCondition(
@@ -22,12 +30,26 @@ function checkPortfolioCondition(
   portfolio: string,
   compareValue: string
 ): boolean {
-  if (condition === RuleTwoCondition.contains) {
-    return portfolio.includes(compareValue);
-  } else if (condition === RuleTwoCondition.exclude) {
-    return !portfolio.includes(compareValue);
+  // Convert both portfolio and compareValue to lowercase for case-insensitive comparison
+  const portfolioLowerCase = portfolio.toLowerCase();
+  const compareValueLowerCase = compareValue.toLowerCase();
+
+  switch (condition) {
+    case RuleTwoCondition.containing:
+      return portfolioLowerCase.includes(compareValueLowerCase);
+    case RuleTwoCondition.notContaining:
+      return !portfolioLowerCase.includes(compareValueLowerCase);
+    case RuleTwoCondition.beginningWith:
+      return portfolioLowerCase.startsWith(compareValueLowerCase);
+    case RuleTwoCondition.endingWith:
+      return portfolioLowerCase.endsWith(compareValueLowerCase);
+    case RuleTwoCondition.equalTo:
+      return portfolioLowerCase === compareValueLowerCase;
+    case RuleTwoCondition.notEqualTo:
+      return portfolioLowerCase !== compareValueLowerCase;
+    default:
+      return false; // fallback for unsupported conditions
   }
-  return false; // fallback in case of invalid condition
 }
 
 function filterFunction(data: any[], tradeRule: TradeRule): any[] {
@@ -75,7 +97,11 @@ function filterFunction(data: any[], tradeRule: TradeRule): any[] {
     // Rule 3: CounterParty - must start with the specified value
     const ruleThree =
       typeof counterParty === 'string' &&
-      counterParty.startsWith(tradeRule.counterParty);
+      checkPortfolioCondition(
+        tradeRule.counterPartyCondition,
+        counterParty,
+        tradeRule.counterParty
+      );
 
     return ruleThree && ruleTwo;
   });

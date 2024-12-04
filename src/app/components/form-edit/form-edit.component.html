@@ -1,15 +1,16 @@
 <div class="card">
-  <b>Create New Rule:</b>
+  <b>Edit Current Rule:</b>
   <form [formGroup]="formGroup" class="form-flex">
     <div class="rule">
       <b>Rule One:</b>
       <div class="field">
         <p-dropdown
-        class="condition-button"
-        formControlName="priceOneCondition"
-        [options]="ruleOneOptions"
-        optionLabel="name"
-        placeholder="Select a Condition" />
+          class="condition-button"
+          formControlName="priceOneCondition"
+          [options]="ruleOneOptions"
+          optionLabel="code"
+          placeholder="Select a Condition"
+        />
         <div
           *ngIf="
             formGroup.get('priceOneCondition')?.touched &&
@@ -40,11 +41,12 @@
       <b>And</b>
       <div class="field">
         <p-dropdown
-        class="condition-button"
-        formControlName="priceTwoCondition"
-        [options]="ruleOneOptions"
-        optionLabel="name"
-        placeholder="Select a Condition" />
+          class="condition-button"
+          formControlName="priceTwoCondition"
+          [options]="ruleOneOptions"
+          optionLabel="name"
+          placeholder="Select a Condition"
+        />
         <div
           *ngIf="
             formGroup.get('priceTwoCondition')?.touched &&
@@ -77,11 +79,12 @@
       <b>Rule Two:</b>
       <div class="field">
         <p-dropdown
-        class="condition-button"
-        formControlName="portfolioOneCondition"
-        [options]="ruleTwoOptions"
-        optionLabel="name"
-        placeholder="Select a Condition" />
+          class="condition-button"
+          formControlName="portfolioOneCondition"
+          [options]="ruleTwoOptions"
+          optionLabel="name"
+          placeholder="Select a Condition"
+        />
         <div
           *ngIf="
             formGroup.get('portfolioOneCondition')?.touched &&
@@ -108,11 +111,12 @@
       <b>And</b>
       <div class="field">
         <p-dropdown
-        class="condition-button"
-        formControlName="portfolioTwoCondition"
-        [options]="ruleTwoOptions"
-        optionLabel="name"
-        placeholder="Select a Condition" />
+          class="condition-button"
+          formControlName="portfolioTwoCondition"
+          [options]="ruleTwoOptions"
+          optionLabel="name"
+          placeholder="Select a Condition"
+        />
         <div
           *ngIf="
             formGroup.get('portfolioTwoCondition')?.touched &&
@@ -141,11 +145,12 @@
       <b>Rule Three:</b>
       <div class="field">
         <p-dropdown
-        class="condition-button"
-        formControlName="counterPartyCondition"
-        [options]="ruleTwoOptions"
-        optionLabel="name"
-        placeholder="Select a Condition" />
+          class="condition-button"
+          formControlName="counterPartyCondition"
+          [options]="ruleTwoOptions"
+          optionLabel="name"
+          placeholder="Select a Condition"
+        />
         <div
           *ngIf="
             formGroup.get('counterPartyCondition')?.touched &&
@@ -161,18 +166,18 @@
           <label for="counterParty">Counterparty</label>
         </p-floatLabel>
         <div
-        *ngIf="
-          formGroup.get('counterParty')?.touched &&
-          formGroup.get('counterParty')?.invalid
-        "
-      >
-        <small class="error-text">Please key a valid value.</small>
-      </div>
+          *ngIf="
+            formGroup.get('counterParty')?.touched &&
+            formGroup.get('counterParty')?.invalid
+          "
+        >
+          <small class="error-text">Please key a valid value.</small>
+        </div>
       </div>
     </div>
     <div style="display: flex; justify-content: center; padding: 10px">
       <p-button
-        label="Create New Filter Rule"
+        label="Edit Current Rule"
         class="p-button-primary"
         (click)="onSubmit()"
       />
